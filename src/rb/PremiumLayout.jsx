@@ -1,11 +1,23 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import './rb.css'
+import {
+  getChecklistState,
+  getStepStatuses,
+  getStoredSubmission,
+  isShippedState,
+} from '../utils/proofSubmission'
 
 function StatusBadge() {
+  const shipped = isShippedState({
+    stepStatuses: getStepStatuses(localStorage),
+    checklistState: getChecklistState(localStorage),
+    submission: getStoredSubmission(localStorage),
+  })
+
   return (
     <div className="pn-status" role="status" aria-live="polite">
-      <span className="pn-status-text">In Progress</span>
+      <span className="pn-status-text">{shipped ? 'Shipped' : 'In Progress'}</span>
     </div>
   )
 }
@@ -40,7 +52,7 @@ function BuildPanel() {
 
 export default function PremiumLayout({ children }) {
   const loc = useLocation()
-  const match = loc.pathname.match(/\/rb\/(0[1-8])\-/)
+  const match = loc.pathname.match(/\/rb\/(0[1-8])-/)
   const stepNum = match ? parseInt(match[1], 10) : null
 
   return (
