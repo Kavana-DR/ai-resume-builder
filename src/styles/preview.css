@@ -28,8 +28,21 @@
   font-weight: 400;
 }
 
-.preview-template-selector {
+.preview-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.preview-top-grid {
   margin-top: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+.preview-template-selector {
+  margin: 0;
   text-align: left;
 }
 
@@ -68,11 +81,6 @@
   text-align: left;
 }
 
-.preview-content {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
 .preview-footer {
   max-width: 1000px;
   margin: 24px auto 0;
@@ -80,6 +88,12 @@
   color: #999;
   font-size: 14px;
   padding: 20px;
+}
+
+@media (max-width: 980px) {
+  .preview-top-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {

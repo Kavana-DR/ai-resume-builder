@@ -1,170 +1,135 @@
-/* Score Card Styles */
 .score-card {
   background: #fff;
-  border: 1px solid #E6E2DB;
-  border-radius: 6px;
-  padding: 24px;
+  border: 1px solid #e6e2db;
+  border-radius: 10px;
+  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-  margin-bottom: 24px;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
 .score-container {
-  text-align: center;
-  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
 }
 
-.score-meter {
-  margin-bottom: 16px;
-}
-
-.score-circle {
-  display: inline-block;
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
-}
-
-.score-circle::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.score-ring {
+  --track: #ece9e2;
+  --fill: #c75a55;
+  width: 132px;
+  height: 132px;
   border-radius: 50%;
-  background: #fafaf8;
-  top: 0;
-  left: 0;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--fill) calc(var(--score) * 1%), var(--track) 0);
+}
+
+.score-ring.getting-there {
+  --fill: #c98d1b;
+}
+
+.score-ring.strong-resume {
+  --fill: #2f8a48;
+}
+
+.score-ring-inner {
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #ece9e2;
 }
 
 .score-number {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
   color: #222;
-  z-index: 1;
+  line-height: 1;
 }
 
 .score-max {
-  position: absolute;
-  bottom: 12px;
-  right: 8px;
-  font-size: 12px;
-  color: #999;
-  z-index: 1;
-}
-
-.score-bar {
-  width: 100%;
-  height: 8px;
-  background: #E6E2DB;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 16px;
-}
-
-.score-fill {
-  height: 100%;
-  background: #D9D4CB;
-  border-radius: 4px;
-  transition: width 0.4s ease, background-color 0.3s ease;
-}
-
-.score-fill.excellent {
-  background: #2d5016;
-}
-
-.score-fill.good {
-  background: #5f9f3e;
-}
-
-.score-fill.fair {
-  background: #d4a42a;
-}
-
-.score-fill.needs-improvement {
-  background: #b8534f;
+  font-size: 13px;
+  color: #777;
+  margin-top: 4px;
 }
 
 .score-label {
+  margin: 0;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: #222;
-  margin-bottom: 8px;
 }
 
-.score-description {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.5;
+.score-status {
   margin: 0;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-/* Suggestions */
+.score-status.needs-work {
+  color: #b9413a;
+}
+
+.score-status.getting-there {
+  color: #aa6f00;
+}
+
+.score-status.strong-resume {
+  color: #2f8a48;
+}
+
 .suggestions {
-  padding-top: 20px;
-  border-top: 1px solid #E6E2DB;
+  border-top: 1px solid #e6e2db;
+  padding-top: 16px;
 }
 
 .suggestions-title {
+  margin: 0 0 10px 0;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 15px;
   color: #222;
-  margin: 0 0 12px 0;
 }
 
 .suggestions-list {
-  list-style: none;
-  padding: 0;
+  list-style: disc;
   margin: 0;
+  padding-left: 18px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 .suggestion-item {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  color: #4f4f4f;
   font-size: 13px;
-  color: #555;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
-.suggestion-icon {
-  flex-shrink: 0;
-  font-size: 14px;
-}
-
-.suggestion-text {
-  flex: 1;
+.suggestion-empty {
+  margin: 0;
+  font-size: 13px;
+  color: #4f4f4f;
 }
 
 @media (max-width: 768px) {
-  .score-circle {
-    width: 80px;
-    height: 80px;
+  .score-ring {
+    width: 112px;
+    height: 112px;
+  }
+
+  .score-ring-inner {
+    width: 86px;
+    height: 86px;
   }
 
   .score-number {
-    font-size: 24px;
-  }
-
-  .score-label {
-    font-size: 14px;
-  }
-
-  .score-description {
-    font-size: 12px;
-  }
-
-  .suggestion-item {
-    font-size: 12px;
+    font-size: 30px;
   }
 }

@@ -2,8 +2,10 @@ import React from 'react'
 import '../styles/preview.css'
 import ResumePreview from '../components/ResumePreview'
 import TemplateSelector from '../components/TemplateSelector'
+import ScoreCard from '../components/ScoreCard'
 import { useResumeData } from '../hooks/useResumeData'
 import { getStoredTemplate, getStoredThemeColor } from '../utils/templates'
+import { calculateATSScore, generateSuggestions } from '../utils/atsScoring'
 import { generateResumePlainText, isResumePotentiallyIncomplete } from '../utils/resumeExport'
 
 export default function Preview() {
@@ -13,6 +15,9 @@ export default function Preview() {
   const [exportWarning, setExportWarning] = React.useState('')
   const [copyStatus, setCopyStatus] = React.useState('')
   const [pdfToast, setPdfToast] = React.useState('')
+
+  const atsScore = React.useMemo(() => calculateATSScore(formData), [formData])
+  const suggestions = React.useMemo(() => generateSuggestions(formData), [formData])
 
   const showCompletenessWarningIfNeeded = () => {
     if (isResumePotentiallyIncomplete(formData)) {
@@ -24,8 +29,9 @@ export default function Preview() {
 
   const handleDownloadPdf = () => {
     showCompletenessWarningIfNeeded()
-    setPdfToast('PDF export ready! Check your downloads.')
+    setPdfToast('Opening print dialog for PDF download...')
     window.setTimeout(() => setPdfToast(''), 2200)
+    window.print()
   }
 
   const handleCopyText = async () => {
@@ -35,7 +41,7 @@ export default function Preview() {
     try {
       await navigator.clipboard.writeText(plainText)
       setCopyStatus('Resume text copied to clipboard.')
-    } catch (error) {
+    } catch {
       setCopyStatus('Unable to copy automatically. Please copy manually.')
     }
   }
@@ -56,9 +62,13 @@ export default function Preview() {
       </div>
 
       <div className="preview-content">
-        <div className="preview-template-selector no-print">
-          <TemplateSelector onTemplateChange={setSelectedTemplate} onColorChange={setSelectedColor} />
+        <div className="preview-top-grid no-print">
+          <div className="preview-template-selector">
+            <TemplateSelector onTemplateChange={setSelectedTemplate} onColorChange={setSelectedColor} />
+          </div>
+          <ScoreCard score={atsScore} suggestions={suggestions} />
         </div>
+
         <div className="preview-actions no-print">
           <button type="button" className="preview-action-btn" onClick={handleDownloadPdf}>
             Download PDF

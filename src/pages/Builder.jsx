@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import '../styles/builder.css'
 import ResumePreview from '../components/ResumePreview'
 import ScoreCard from '../components/ScoreCard'
@@ -63,9 +63,9 @@ function TagInput({ tags, inputValue, onInputChange, onAddTag, onRemoveTag, plac
 
 export default function Builder() {
   const { formData, setFormData, isLoaded } = useResumeData()
-  const [atsScore, setAtsScore] = React.useState(0)
-  const [suggestions, setSuggestions] = React.useState([])
-  const [improvements, setImprovements] = React.useState([])
+  const atsScore = React.useMemo(() => calculateATSScore(formData), [formData])
+  const suggestions = React.useMemo(() => generateSuggestions(formData), [formData])
+  const improvements = React.useMemo(() => getImprovementRecommendations(formData), [formData])
   const [selectedTemplate, setSelectedTemplate] = React.useState(getStoredTemplate())
   const [selectedColor, setSelectedColor] = React.useState(getStoredThemeColor())
   const [skillsExpanded, setSkillsExpanded] = React.useState(true)
@@ -74,15 +74,6 @@ export default function Builder() {
   const [suggestSkillsLoading, setSuggestSkillsLoading] = React.useState(false)
   const [skillInputs, setSkillInputs] = React.useState({ technical: '', soft: '', tools: '' })
   const [projectStackInputs, setProjectStackInputs] = React.useState({})
-
-  useEffect(() => {
-    if (isLoaded) {
-      const score = calculateATSScore(formData)
-      setAtsScore(score)
-      setSuggestions(generateSuggestions(formData, score))
-      setImprovements(getImprovementRecommendations(formData))
-    }
-  }, [formData, isLoaded])
 
   const handlePersonalInfoChange = (field, value) => {
     setFormData((prev) => ({
@@ -616,3 +607,4 @@ export default function Builder() {
     </div>
   )
 }
+
