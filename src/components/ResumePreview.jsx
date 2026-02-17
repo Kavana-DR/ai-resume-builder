@@ -4,6 +4,14 @@ import '../styles/resume-preview.css'
 export default function ResumePreview({ data }) {
   const skills = data.skills.split(',').map(s => s.trim()).filter(s => s)
   
+  // Check if sections have content
+  const hasSummary = data.summary && data.summary.trim()
+  const hasExperience = data.experience.some(exp => exp.company || exp.position)
+  const hasEducation = data.education.some(edu => edu.school || edu.degree)
+  const hasProjects = data.projects.some(proj => proj.title)
+  const hasSkills = skills.length > 0
+  const hasLinks = data.links.github || data.links.linkedin
+  
   return (
     <div className="resume-preview-panel">
       <div className="resume-preview-header">
@@ -16,15 +24,19 @@ export default function ResumePreview({ data }) {
           {data.personalInfo.name && (
             <h1 className="resume-name">{data.personalInfo.name}</h1>
           )}
-          <div className="resume-contact">
-            {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
-            {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
-            {data.personalInfo.location && <span>{data.personalInfo.location}</span>}
-          </div>
+          {(data.personalInfo.email || data.personalInfo.phone || data.personalInfo.location) && (
+            <div className="resume-contact">
+              {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
+              {data.personalInfo.phone && <span>•</span>}
+              {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+              {data.personalInfo.location && <span>•</span>}
+              {data.personalInfo.location && <span>{data.personalInfo.location}</span>}
+            </div>
+          )}
         </div>
 
         {/* Summary */}
-        {data.summary && (
+        {hasSummary && (
           <section className="resume-section">
             <h2 className="resume-section-title">Summary</h2>
             <p className="resume-text">{data.summary}</p>
@@ -32,7 +44,7 @@ export default function ResumePreview({ data }) {
         )}
 
         {/* Experience */}
-        {data.experience.some(exp => exp.company || exp.position) && (
+        {hasExperience && (
           <section className="resume-section">
             <h2 className="resume-section-title">Experience</h2>
             {data.experience.map((exp, idx) => (
@@ -51,7 +63,7 @@ export default function ResumePreview({ data }) {
         )}
 
         {/* Education */}
-        {data.education.some(edu => edu.school || edu.degree) && (
+        {hasEducation && (
           <section className="resume-section">
             <h2 className="resume-section-title">Education</h2>
             {data.education.map((edu, idx) => (
@@ -72,7 +84,7 @@ export default function ResumePreview({ data }) {
         )}
 
         {/* Projects */}
-        {data.projects.some(proj => proj.title) && (
+        {hasProjects && (
           <section className="resume-section">
             <h2 className="resume-section-title">Projects</h2>
             {data.projects.map((proj, idx) => (
@@ -90,7 +102,7 @@ export default function ResumePreview({ data }) {
         )}
 
         {/* Skills */}
-        {skills.length > 0 && (
+        {hasSkills && (
           <section className="resume-section">
             <h2 className="resume-section-title">Skills</h2>
             <div className="resume-skills">
@@ -102,7 +114,7 @@ export default function ResumePreview({ data }) {
         )}
 
         {/* Links */}
-        {(data.links.github || data.links.linkedin) && (
+        {hasLinks && (
           <section className="resume-section">
             <div className="resume-links">
               {data.links.github && <p className="resume-link-item">GitHub: {data.links.github}</p>}

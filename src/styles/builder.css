@@ -142,10 +142,37 @@ textarea {
 }
 
 /* Right Panel - Preview */
-.builder-preview {
+.builder-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   position: sticky;
   top: 110px;
   height: fit-content;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+
+.builder-preview {
+  flex: 1;
+}
+
+/* Scrollbar for sidebar */
+.builder-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.builder-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.builder-sidebar::-webkit-scrollbar-thumb {
+  background: #D9D4CB;
+  border-radius: 3px;
+}
+
+.builder-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }
 
 /* Responsive */

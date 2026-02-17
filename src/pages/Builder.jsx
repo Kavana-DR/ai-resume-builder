@@ -1,25 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import '../styles/builder.css'
 import ResumePreview from '../components/ResumePreview'
+import ScoreCard from '../components/ScoreCard'
+import { useResumeData } from '../hooks/useResumeData'
+import { calculateATSScore, generateSuggestions } from '../utils/atsScoring'
 
 export default function Builder() {
-  const [formData, setFormData] = useState({
-    personalInfo: {
-      name: '',
-      email: '',
-      phone: '',
-      location: ''
-    },
-    summary: '',
-    education: [{ school: '', degree: '', field: '', year: '' }],
-    experience: [{ company: '', position: '', duration: '', description: '' }],
-    projects: [{ title: '', description: '', link: '' }],
-    skills: '',
-    links: {
-      github: '',
-      linkedin: ''
+  const { formData, setFormData, isLoaded } = useResumeData()
+  const [atsScore, setAtsScore] = React.useState(0)
+  const [suggestions, setSuggestions] = React.useState([])
+
+  // Calculate ATS score and suggestions whenever formData changes
+  useEffect(() => {
+    if (isLoaded) {
+      const score = calculateATSScore(formData)
+      setAtsScore(score)
+      setSuggestions(generateSuggestions(formData, score))
     }
-  })
+  }, [formData, isLoaded])
 
   const handlePersonalInfoChange = (field, value) => {
     setFormData(prev => ({
@@ -125,18 +123,23 @@ export default function Builder() {
         { school: 'Stanford University', degree: 'BS', field: 'Computer Science', year: '2019' }
       ],
       experience: [
-        { company: 'Tech Corp', position: 'Senior Software Engineer', duration: '2021 - Present', description: 'Led development of microservices architecture serving 1M+ users' },
-        { company: 'StartupXYZ', position: 'Full-Stack Developer', duration: '2019 - 2021', description: 'Built and maintained React and Node.js applications' }
+        { company: 'Tech Corp', position: 'Senior Software Engineer', duration: '2021 - Present', description: 'Led development of microservices architecture serving 1M+ users. Improved system performance by 40% resulting in 2x faster response times.' },
+        { company: 'StartupXYZ', position: 'Full-Stack Developer', duration: '2019 - 2021', description: 'Built and maintained React and Node.js applications. Reduced deployment time from 30m to 5m through CI/CD optimization.' }
       ],
       projects: [
-        { title: 'AI Resume Builder', description: 'Smart resume generation tool with real-time feedback', link: 'github.com/project' }
+        { title: 'AI Resume Builder', description: 'Smart resume generation tool with real-time ATS scoring feedback. Achieved 95% accuracy in parsing.' , link: 'github.com/project' },
+        { title: 'Analytics Dashboard', description: 'Real-time data visualization platform processing 10k+ events/sec', link: 'github.com/project2' }
       ],
-      skills: 'React, Node.js, JavaScript, TypeScript, PostgreSQL, MongoDB, AWS, Docker, Git',
+      skills: 'React, Node.js, JavaScript, TypeScript, PostgreSQL, MongoDB, AWS, Docker, Git, Python, SQL, REST APIs',
       links: {
         github: 'github.com/alexjohnson',
         linkedin: 'linkedin.com/in/alexjohnson'
       }
     })
+  }
+
+  if (!isLoaded) {
+    return <div className="builder-container"><p>Loading...</p></div>
   }
 
   return (
@@ -346,9 +349,12 @@ export default function Builder() {
           </section>
         </div>
 
-        {/* Right: Live Preview */}
-        <div className="builder-preview">
-          <ResumePreview data={formData} />
+        {/* Right: Score Card + Live Preview */}
+        <div className="builder-sidebar">
+          <ScoreCard score={atsScore} suggestions={suggestions} />
+          <div className="builder-preview">
+            <ResumePreview data={formData} />
+          </div>
         </div>
       </div>
     </div>
