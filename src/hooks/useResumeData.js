@@ -86,6 +86,22 @@ function normalizeFormData(parsedData = {}) {
   }
 }
 
+function isStoredSampleData(parsedData = {}) {
+  const name = parsedData?.personalInfo?.name?.trim?.() || ''
+  const email = parsedData?.personalInfo?.email?.trim?.() || ''
+  const summary = parsedData?.summary?.trim?.() || ''
+  const firstProject = parsedData?.projects?.[0]?.title?.trim?.() || ''
+  const secondProject = parsedData?.projects?.[1]?.title?.trim?.() || ''
+
+  return (
+    name === 'Alex Johnson' &&
+    email === 'alex@example.com' &&
+    firstProject === 'AI Resume Builder' &&
+    secondProject === 'Analytics Dashboard' &&
+    summary.includes('Full-stack developer with 5+ years of experience')
+  )
+}
+
 export function useResumeData() {
   const [formData, setFormData] = useState(defaultFormData)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -96,7 +112,13 @@ export function useResumeData() {
     if (savedData) {
       try {
         const parsedData = JSON.parse(savedData)
-        setFormData(normalizeFormData(parsedData))
+        // Avoid auto-hydrating prefilled sample data; keep fresh form until user clicks load sample.
+        if (isStoredSampleData(parsedData)) {
+          localStorage.removeItem(STORAGE_KEY)
+          setFormData(defaultFormData)
+        } else {
+          setFormData(normalizeFormData(parsedData))
+        }
       } catch (error) {
         console.error('Failed to parse saved data:', error)
         setFormData(defaultFormData)
