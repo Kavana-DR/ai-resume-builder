@@ -1,14 +1,26 @@
 import React from 'react'
 import '../styles/resume-preview.css'
 
+const SKILL_LABELS = {
+  technical: 'Technical Skills',
+  soft: 'Soft Skills',
+  tools: 'Tools & Technologies',
+}
+
 export default function ResumePreview({ data, template = 'classic', showHeader = true }) {
-  const skills = data.skills.split(',').map((s) => s.trim()).filter((s) => s)
+  const skillsByCategory = data.skillsByCategory || { technical: [], soft: [], tools: [] }
+  const flatSkills = data.skills ? data.skills.split(',').map((s) => s.trim()).filter((s) => s) : []
+  const normalizedSkills = {
+    technical: (skillsByCategory.technical || []).length > 0 ? skillsByCategory.technical : flatSkills,
+    soft: skillsByCategory.soft || [],
+    tools: skillsByCategory.tools || [],
+  }
 
   const hasSummary = data.summary && data.summary.trim()
   const hasExperience = data.experience.some((exp) => exp.company || exp.position)
   const hasEducation = data.education.some((edu) => edu.school || edu.degree)
   const hasProjects = data.projects.some((proj) => proj.title)
-  const hasSkills = skills.length > 0
+  const hasSkills = Object.values(normalizedSkills).some((group) => group.length > 0)
   const hasLinks = data.links.github || data.links.linkedin
 
   return (
@@ -83,30 +95,62 @@ export default function ResumePreview({ data, template = 'classic', showHeader =
         {hasProjects && (
           <section className="resume-section">
             <h2 className="resume-section-title">Projects</h2>
-            {data.projects.map(
-              (proj, idx) =>
-                proj.title && (
-                  <div key={idx} className="resume-entry">
-                    <div className="resume-entry-header">
-                      <strong className="resume-title">{proj.title}</strong>
-                    </div>
-                    {proj.description && <p className="resume-text">{proj.description}</p>}
-                    {proj.link && <div className="resume-link">{proj.link}</div>}
-                  </div>
-                ),
-            )}
+            <div className="project-card-grid">
+              {data.projects.map(
+                (proj, idx) =>
+                  proj.title && (
+                    <article key={idx} className="project-card">
+                      <h3 className="project-card-title">{proj.title}</h3>
+                      {proj.description && <p className="resume-text">{proj.description}</p>}
+                      {(proj.techStack || []).length > 0 && (
+                        <div className="resume-skills">
+                          {proj.techStack.map((tech, techIdx) => (
+                            <span key={`${proj.title}-${tech}-${techIdx}`} className="skill-badge">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {(proj.liveUrl || proj.githubUrl || proj.link) && (
+                        <div className="project-links">
+                          {proj.liveUrl && (
+                            <a href={proj.liveUrl} target="_blank" rel="noreferrer" className="project-link-item">
+                              ↗ Live
+                            </a>
+                          )}
+                          {proj.githubUrl && (
+                            <a href={proj.githubUrl} target="_blank" rel="noreferrer" className="project-link-item">
+                              [GH] GitHub
+                            </a>
+                          )}
+                          {!proj.githubUrl && !proj.liveUrl && proj.link && <span className="resume-link">{proj.link}</span>}
+                        </div>
+                      )}
+                    </article>
+                  ),
+              )}
+            </div>
           </section>
         )}
 
         {hasSkills && (
           <section className="resume-section">
             <h2 className="resume-section-title">Skills</h2>
-            <div className="resume-skills">
-              {skills.map((skill, idx) => (
-                <span key={idx} className="skill-badge">
-                  {skill}
-                </span>
-              ))}
+            <div className="skills-group-wrap">
+              {Object.entries(normalizedSkills).map(([groupKey, items]) =>
+                items.length > 0 ? (
+                  <div key={groupKey} className="skills-group">
+                    <p className="skills-group-label">{SKILL_LABELS[groupKey]}</p>
+                    <div className="resume-skills">
+                      {items.map((skill, idx) => (
+                        <span key={`${groupKey}-${skill}-${idx}`} className="skill-badge">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null,
+              )}
             </div>
           </section>
         )}

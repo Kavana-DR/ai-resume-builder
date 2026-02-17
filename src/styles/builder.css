@@ -141,6 +141,159 @@ textarea {
   font-size: 12px;
 }
 
+.accordion-section {
+  padding-top: 18px;
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #E6E2DB;
+  border-radius: 0;
+  padding: 0 0 12px 0;
+  margin: 0 0 14px 0;
+}
+
+.accordion-header h2 {
+  margin: 0;
+}
+
+.accordion-header span {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.accordion-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skills-actions {
+  margin-bottom: 2px;
+}
+
+.skills-suggest-btn {
+  padding: 10px 14px;
+}
+
+.tag-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+.tag-input-wrap {
+  border: 1px solid #D9D4CB;
+  border-radius: 4px;
+  background: #fff;
+  padding: 8px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  border: 1px solid #D9D4CB;
+  background: #fafaf8;
+  color: #222;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.tag-remove {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+  line-height: 1;
+}
+
+.tag-remove:hover {
+  color: #222;
+  background: transparent;
+}
+
+.tag-input-wrap input {
+  border: none;
+  width: 100%;
+  padding: 6px 4px 2px;
+}
+
+.tag-input-wrap input:focus {
+  box-shadow: none;
+}
+
+.project-accordion-item {
+  border: 1px solid #E6E2DB;
+  border-radius: 4px;
+  background: #fafaf8;
+  padding: 12px;
+}
+
+.project-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-toggle {
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  flex: 1;
+}
+
+.project-toggle:hover {
+  background: transparent;
+}
+
+.project-item-body {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-description-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.char-counter {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+}
+
 /* Right Panel - Preview */
 .builder-sidebar {
   display: flex;
