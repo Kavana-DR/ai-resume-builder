@@ -1,0 +1,88 @@
+/* Proof Page Styles */
+.proof-container {
+  min-height: calc(100vh - 70px);
+  background: #F7F6F3;
+  padding: 40px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.proof-header {
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.proof-header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.proof-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+.proof-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.proof-placeholder {
+  background: #fff;
+  border: 2px dashed #D9D4CB;
+  border-radius: 8px;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.placeholder-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.proof-placeholder h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 12px 0;
+}
+
+.proof-placeholder p {
+  font-size: 16px;
+  color: #999;
+  margin: 0;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .proof-container {
+    padding: 20px;
+  }
+
+  .proof-header h1 {
+    font-size: 28px;
+  }
+
+  .proof-placeholder {
+    padding: 40px 24px;
+  }
+
+  .placeholder-icon {
+    font-size: 36px;
+  }
+
+  .proof-placeholder h2 {
+    font-size: 20px;
+  }
+
+  .proof-placeholder p {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,162 @@
+/* Preview Page Styles */
+.preview-container {
+  min-height: calc(100vh - 70px);
+  background: #F7F6F3;
+  padding: 40px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.preview-header {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.preview-header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.preview-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+.preview-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.resume-page {
+  background: #fff;
+  padding: 48px;
+  border: 1px solid #E6E2DB;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+  line-height: 1.7;
+  color: #222;
+}
+
+/* Resume Header */
+.resume-header {
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #222;
+  text-align: center;
+}
+
+.resume-name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.3px;
+}
+
+.resume-contact {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: #555;
+}
+
+.resume-contact span {
+  display: inline;
+}
+
+/* Resume Sections */
+.resume-section {
+  margin-bottom: 24px;
+}
+
+.resume-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #222;
+  padding-bottom: 6px;
+}
+
+.section-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Placeholder Content */
+.placeholder-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.placeholder-line {
+  height: 12px;
+  background: linear-gradient(90deg, #fafaf8 0%, #E6E2DB 50%, #fafaf8 100%);
+  border-radius: 2px;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Preview Footer */
+.preview-footer {
+  max-width: 1000px;
+  margin: 40px auto 0;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .preview-container {
+    padding: 20px;
+  }
+
+  .preview-header h1 {
+    font-size: 28px;
+  }
+
+  .resume-page {
+    padding: 28px;
+  }
+
+  .resume-name {
+    font-size: 22px;
+  }
+
+  .resume-contact {
+    font-size: 12px;
+  }
+
+  .section-title {
+    font-size: 12px;
+  }
+}

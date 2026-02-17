@@ -1,0 +1,186 @@
+/* Builder Page Styles */
+.builder-container {
+  min-height: calc(100vh - 70px);
+  background: #F7F6F3;
+  padding: 40px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.builder-header {
+  max-width: 1400px;
+  margin: 0 auto 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.builder-header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.builder-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* Form Styles */
+.builder-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-section {
+  background: #fff;
+  padding: 28px;
+  border-radius: 6px;
+  border: 1px solid #E6E2DB;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.form-section h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 16px 0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #fafaf8;
+  border-radius: 4px;
+  border: 1px solid #E6E2DB;
+  margin-bottom: 12px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+input, textarea {
+  padding: 12px;
+  border: 1px solid #D9D4CB;
+  border-radius: 4px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px;
+  color: #222;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #999;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #222;
+  box-shadow: 0 0 0 3px rgba(34, 34, 34, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Button Styles */
+.btn-add, .btn-remove, .btn-secondary {
+  align-self: flex-start;
+  padding: 10px 16px;
+  border: 1px solid #D9D4CB;
+  background: #fff;
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.btn-add:hover, .btn-remove:hover {
+  background: #fafaf8;
+  border-color: #999;
+}
+
+.btn-secondary {
+  padding: 12px 24px;
+  background: #222;
+  color: #F7F6F3;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background: #444;
+}
+
+.btn-remove {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+/* Right Panel - Preview */
+.builder-preview {
+  position: sticky;
+  top: 110px;
+  height: fit-content;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .builder-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .builder-preview {
+    position: static;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .builder-container {
+    padding: 20px;
+  }
+
+  .builder-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .builder-header h1 {
+    font-size: 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .builder-layout {
+    gap: 12px;
+  }
+}
