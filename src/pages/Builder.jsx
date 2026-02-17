@@ -8,7 +8,7 @@ import BulletGuidance from '../components/BulletGuidance'
 import { useResumeData } from '../hooks/useResumeData'
 import { calculateATSScore, generateSuggestions } from '../utils/atsScoring'
 import { getBulletSuggestions, getImprovementRecommendations } from '../utils/bulletGuidance'
-import { getStoredTemplate } from '../utils/templates'
+import { getStoredTemplate, getStoredThemeColor } from '../utils/templates'
 
 const SKILL_CATEGORIES = [
   { key: 'technical', label: 'Technical Skills' },
@@ -67,6 +67,7 @@ export default function Builder() {
   const [suggestions, setSuggestions] = React.useState([])
   const [improvements, setImprovements] = React.useState([])
   const [selectedTemplate, setSelectedTemplate] = React.useState(getStoredTemplate())
+  const [selectedColor, setSelectedColor] = React.useState(getStoredThemeColor())
   const [skillsExpanded, setSkillsExpanded] = React.useState(true)
   const [projectsExpanded, setProjectsExpanded] = React.useState(true)
   const [projectOpenMap, setProjectOpenMap] = React.useState({})
@@ -345,8 +346,6 @@ export default function Builder() {
 
       <div className="builder-layout">
         <div className="builder-form">
-          <TemplateSelector onTemplateChange={setSelectedTemplate} />
-
           <section className="form-section">
             <h2>Personal Information</h2>
             <div className="form-row">
@@ -608,8 +607,9 @@ export default function Builder() {
         <div className="builder-sidebar">
           <ScoreCard score={atsScore} suggestions={suggestions} />
           <ImprovementPanel recommendations={improvements} />
+          <TemplateSelector onTemplateChange={setSelectedTemplate} onColorChange={setSelectedColor} compact />
           <div className="builder-preview">
-            <ResumePreview data={formData} template={selectedTemplate} />
+            <ResumePreview data={formData} template={selectedTemplate} themeColor={selectedColor} />
           </div>
         </div>
       </div>

@@ -1,13 +1,12 @@
-/* Resume Preview Component Styles */
 .resume-preview-panel {
   background: #fff;
   border: 1px solid #e6e2db;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-  height: 100%;
   display: flex;
   flex-direction: column;
+  --accent-color: hsl(168, 60%, 40%);
 }
 
 .standalone-preview {
@@ -32,9 +31,8 @@
 .resume-content {
   flex: 1;
   overflow-y: auto;
-  padding: 32px 24px;
+  padding: 30px 24px;
   background: #fff;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.6;
   color: #222;
@@ -43,11 +41,9 @@
 .resume-header {
   margin-bottom: 24px;
   padding-bottom: 16px;
-  border-bottom: 2px solid #222;
 }
 
 .resume-name {
-  font-family: Georgia, 'Times New Roman', serif;
   font-size: 24px;
   font-weight: 700;
   color: #222;
@@ -72,25 +68,20 @@
 }
 
 .resume-section-title {
-  font-family: Georgia, 'Times New Roman', serif;
   font-size: 13px;
   font-weight: 700;
-  color: #222;
+  color: var(--accent-color);
   margin: 0 0 12px 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 1px solid #d9d4cb;
-  padding-bottom: 8px;
+  letter-spacing: 0.9px;
 }
 
 .resume-entry {
   margin-bottom: 12px;
-  padding-bottom: 12px;
 }
 
 .resume-entry:last-child {
   margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .resume-entry-header {
@@ -119,7 +110,7 @@
 
 .resume-meta {
   font-size: 12px;
-  color: #999;
+  color: #777;
   white-space: nowrap;
 }
 
@@ -135,27 +126,9 @@
 .resume-link,
 .resume-link-item {
   font-size: 12px;
-  color: #555;
+  color: #444;
   margin: 4px 0 0 0;
   word-break: break-word;
-}
-
-.resume-skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.skill-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  background: #fafaf8;
-  border: 1px solid #d9d4cb;
-  border-radius: 3px;
-  font-size: 12px;
-  color: #222;
-  white-space: nowrap;
 }
 
 .resume-links {
@@ -177,6 +150,23 @@
   font-weight: 600;
 }
 
+.resume-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: color-mix(in srgb, var(--accent-color) 8%, white);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 45%, white);
+  border-radius: 3px;
+  font-size: 12px;
+  color: #222;
+  white-space: nowrap;
+}
+
 .project-card-grid {
   display: flex;
   flex-direction: column;
@@ -184,7 +174,7 @@
 }
 
 .project-card {
-  border: 1px solid #e6e2db;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 40%, white);
   border-radius: 4px;
   padding: 10px;
   background: #fff;
@@ -206,104 +196,12 @@
 
 .project-link-item {
   font-size: 12px;
-  color: #222;
+  color: var(--accent-color);
   text-decoration: none;
 }
 
 .project-link-item:hover {
   text-decoration: underline;
-}
-
-/* Classic (default) */
-.template-classic .resume-content {
-  font-family: Georgia, 'Times New Roman', serif;
-}
-
-.template-classic .resume-text,
-.template-classic .resume-company,
-.template-classic .resume-link,
-.template-classic .resume-link-item,
-.template-classic .resume-contact {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-}
-
-/* Modern */
-.template-modern .resume-content {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.template-modern .resume-header {
-  border-bottom: 1px solid #222;
-  padding-bottom: 12px;
-}
-
-.template-modern .resume-section-title {
-  text-transform: none;
-  letter-spacing: 0.3px;
-  border-bottom: none;
-  border-left: 3px solid #222;
-  padding: 2px 0 2px 10px;
-  font-size: 14px;
-}
-
-.template-modern .resume-entry {
-  border-left: 1px solid #e6e2db;
-  padding-left: 12px;
-}
-
-/* Minimal */
-.template-minimal .resume-content {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 28px 22px;
-}
-
-.template-minimal .resume-header {
-  border-bottom: 1px solid #d9d4cb;
-}
-
-.template-minimal .resume-name {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 22px;
-  letter-spacing: 0;
-}
-
-.template-minimal .resume-section-title {
-  border-bottom: none;
-  letter-spacing: 0.4px;
-  font-size: 12px;
-  margin-bottom: 10px;
-}
-
-.template-minimal .resume-entry {
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-}
-
-.template-minimal .skill-badge {
-  border-radius: 2px;
-  background: #fff;
-}
-
-@media (max-width: 768px) {
-  .resume-content {
-    padding: 20px 16px;
-  }
-
-  .resume-name {
-    font-size: 20px;
-  }
-
-  .resume-contact {
-    font-size: 12px;
-  }
-
-  .resume-section-title {
-    font-size: 12px;
-  }
-
-  .project-links {
-    gap: 8px;
-  }
 }
 
 .resume-content::-webkit-scrollbar {
@@ -323,33 +221,158 @@
   background: #999;
 }
 
+/* Classic: serif heading, section rules */
+.template-classic .resume-content {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.template-classic .resume-name,
+.template-classic .resume-section-title {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.template-classic .resume-header {
+  border-bottom: 2px solid color-mix(in srgb, var(--accent-color) 70%, black);
+}
+
+.template-classic .resume-section-title {
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-color) 45%, white);
+  padding-bottom: 8px;
+}
+
+/* Modern: two columns with colored sidebar */
+.resume-modern-layout {
+  display: grid;
+  grid-template-columns: 34% 66%;
+  min-height: 100%;
+}
+
+.resume-modern-sidebar {
+  background: var(--accent-color);
+  color: #fff;
+  padding: 18px 16px;
+}
+
+.template-modern .resume-name,
+.template-modern .resume-contact,
+.template-modern .skills-group-label,
+.template-modern .resume-link-item,
+.template-modern .resume-section-title {
+  color: #fff;
+}
+
+.template-modern .resume-link-item {
+  opacity: 0.95;
+}
+
+.template-modern .skill-badge {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+
+.template-modern .sidebar-section {
+  margin-top: 18px;
+}
+
+.template-modern .sidebar-section .resume-section-title {
+  border: none;
+  padding: 0;
+  letter-spacing: 0.7px;
+}
+
+.resume-modern-main {
+  padding: 20px 18px 0 22px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.template-modern .resume-modern-main .resume-section-title {
+  color: var(--accent-color);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-color) 45%, white);
+  padding-bottom: 6px;
+}
+
+/* Minimal: no rules, airy spacing, sans-serif */
+.template-minimal .resume-content {
+  padding: 36px 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.template-minimal .resume-header {
+  border-bottom: none;
+  margin-bottom: 28px;
+}
+
+.template-minimal .resume-name {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.template-minimal .resume-section {
+  margin-bottom: 26px;
+}
+
+.template-minimal .resume-section-title {
+  border: none;
+  padding: 0;
+  text-transform: none;
+  letter-spacing: 0.2px;
+  font-weight: 600;
+}
+
+.template-minimal .project-card {
+  border: none;
+  padding: 0;
+}
+
+.template-minimal .skill-badge {
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .resume-content {
+    padding: 20px 16px;
+  }
+
+  .resume-modern-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-modern-main {
+    padding: 18px 0 0;
+  }
+
+  .resume-name {
+    font-size: 20px;
+  }
+
+  .resume-section-title {
+    font-size: 12px;
+  }
+}
+
 @media print {
   .resume-content {
     color: #000 !important;
-    font-size: 11.25pt;
+    font-size: 11.2pt;
     line-height: 1.4;
   }
 
-  .resume-header {
-    margin-bottom: 14pt;
-    padding-bottom: 8pt;
-    border-bottom: 1pt solid #000;
-    page-break-after: avoid;
+  .resume-modern-layout {
+    grid-template-columns: 1fr 2fr;
   }
 
-  .resume-name,
-  .resume-section-title,
-  .resume-title,
-  .resume-company,
-  .resume-text,
-  .resume-meta,
-  .resume-link,
-  .resume-link-item,
-  .skill-badge,
-  .resume-contact {
-    color: #000 !important;
+  .resume-modern-sidebar {
     background: #fff !important;
-    border-color: #000 !important;
+    color: #000 !important;
+    border-right: 1px solid #ddd;
+  }
+
+  .template-modern .resume-name,
+  .template-modern .resume-contact,
+  .template-modern .skills-group-label,
+  .template-modern .resume-link-item,
+  .template-modern .resume-section-title {
+    color: #000 !important;
   }
 
   .resume-section,
@@ -357,15 +380,5 @@
   .project-card {
     break-inside: avoid;
     page-break-inside: avoid;
-  }
-
-  .resume-entry:last-child,
-  .resume-section:last-child {
-    break-inside: auto;
-    page-break-inside: auto;
-  }
-
-  .skill-badge {
-    padding: 2px 6px;
   }
 }

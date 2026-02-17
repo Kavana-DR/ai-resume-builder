@@ -308,6 +308,11 @@ textarea {
 
 .builder-preview {
   flex: 1;
+  margin-top: 12px;
+}
+
+.builder-sidebar .template-selector {
+  margin: 8px 0 0;
 }
 
 /* Scrollbar for sidebar */
