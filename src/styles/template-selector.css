@@ -1,0 +1,47 @@
+.template-selector {
+  background: #fff;
+  border: 1px solid #e6e2db;
+  border-radius: 6px;
+  padding: 14px;
+}
+
+.template-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.template-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.template-option {
+  border: 1px solid #d9d4cb;
+  background: #fff;
+  color: #222;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.template-option:hover {
+  border-color: #999;
+  background: #fafaf8;
+}
+
+.template-option.active {
+  border-color: #222;
+  background: #f3f2ee;
+}
+
+.template-name {
+  font-weight: 500;
+}

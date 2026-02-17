@@ -2,13 +2,20 @@ import React, { useEffect } from 'react'
 import '../styles/builder.css'
 import ResumePreview from '../components/ResumePreview'
 import ScoreCard from '../components/ScoreCard'
+import TemplateSelector from '../components/TemplateSelector'
+import ImprovementPanel from '../components/ImprovementPanel'
+import BulletGuidance from '../components/BulletGuidance'
 import { useResumeData } from '../hooks/useResumeData'
 import { calculateATSScore, generateSuggestions } from '../utils/atsScoring'
+import { getBulletSuggestions, getImprovementRecommendations } from '../utils/bulletGuidance'
+import { getStoredTemplate } from '../utils/templates'
 
 export default function Builder() {
   const { formData, setFormData, isLoaded } = useResumeData()
   const [atsScore, setAtsScore] = React.useState(0)
   const [suggestions, setSuggestions] = React.useState([])
+  const [improvements, setImprovements] = React.useState([])
+  const [selectedTemplate, setSelectedTemplate] = React.useState(getStoredTemplate())
 
   // Calculate ATS score and suggestions whenever formData changes
   useEffect(() => {
@@ -16,6 +23,7 @@ export default function Builder() {
       const score = calculateATSScore(formData)
       setAtsScore(score)
       setSuggestions(generateSuggestions(formData, score))
+      setImprovements(getImprovementRecommendations(formData))
     }
   }, [formData, isLoaded])
 
@@ -152,6 +160,8 @@ export default function Builder() {
       <div className="builder-layout">
         {/* Left: Form Sections */}
         <div className="builder-form">
+          <TemplateSelector onTemplateChange={setSelectedTemplate} />
+
           {/* Personal Info */}
           <section className="form-section">
             <h2>Personal Information</h2>
@@ -271,6 +281,7 @@ export default function Builder() {
                   value={exp.description}
                   onChange={(e) => handleExperienceChange(index, 'description', e.target.value)}
                 />
+                <BulletGuidance suggestions={getBulletSuggestions(exp.description)} />
                 {formData.experience.length > 1 && (
                   <button
                     className="btn-remove"
@@ -301,6 +312,7 @@ export default function Builder() {
                   value={proj.description}
                   onChange={(e) => handleProjectsChange(index, 'description', e.target.value)}
                 />
+                <BulletGuidance suggestions={getBulletSuggestions(proj.description)} />
                 <input
                   type="text"
                   placeholder="Link (GitHub, live demo, etc.)"
@@ -352,8 +364,9 @@ export default function Builder() {
         {/* Right: Score Card + Live Preview */}
         <div className="builder-sidebar">
           <ScoreCard score={atsScore} suggestions={suggestions} />
+          <ImprovementPanel recommendations={improvements} />
           <div className="builder-preview">
-            <ResumePreview data={formData} />
+            <ResumePreview data={formData} template={selectedTemplate} />
           </div>
         </div>
       </div>
